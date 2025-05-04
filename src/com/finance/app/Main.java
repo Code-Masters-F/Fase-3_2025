@@ -10,7 +10,8 @@ public class Main {
 
         // Testes Classe Cliente:
         Cliente robson123 = new Cliente("222222-33333", "Robson", "robsone@mail.com", "2000-02-02");
-        Cliente maria123 = new Cliente("222222-44444", "Maria", "maria@email.com", "1994-03-03");
+        Pessoa maria = new Pessoa("222222-44444", "Maria", "1994-03-03");
+        Cliente maria123 = new Cliente(maria, "maria@email.com");
 
         System.out.println(robson123.toString());
 
@@ -21,6 +22,7 @@ public class Main {
         robson123.conta.transferirContasCorretora(maria123.conta, 10.5f);
         System.out.println(maria123.conta.toString());
         System.out.println(robson123.conta.toString());
+        System.out.println(robson123.toString());
 
         Crypto ethereum = new Crypto("Ethereum", "ETH");
         ethereum.setAnoLancamento(2015); // definindo o ano de lançamento da criptomoeda
