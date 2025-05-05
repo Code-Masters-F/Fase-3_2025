@@ -10,6 +10,19 @@ public class Crypto {
 
     // Construtor
     public Crypto(String nome, String simbolo) {
+
+        // Esta validação é crucial para garantir que uma criptomoeda tenha sempre um nome válido
+        if (nome == null || nome.trim().isEmpty()) {
+            // Lança uma exceção que interrompe a criação do objeto, indicando ao chamador o problema exato
+            throw new IllegalArgumentException("Nome da criptomoeda não pode ser nulo ou vazio");
+        }
+
+        // Símbolos são importantes para identificação única e rápida da criptomoeda (ex: BTC, ETH)
+        if (simbolo == null || simbolo.trim().isEmpty()) {
+            // Lança exceção informando o erro específico relacionado ao símbolo
+            throw new IllegalArgumentException("Símbolo da criptomoeda não pode ser nulo ou vazio");
+        }
+
         this.nome = nome;
         this.simbolo = simbolo;
         this.id = proximoId++;
@@ -26,6 +39,10 @@ public class Crypto {
 
     public int getAnoLancamento() {
         return anoLancamento;  // Retorna int em vez de void
+    }
+
+    public int getId() {
+        return id;
     }
 
     // para definir o ano de lançamento
