@@ -74,6 +74,10 @@ public class Conta {
     public float getSaldo() {
         return saldo;
     }
+
+    public int getId() {
+        return id;
+    }
 }
 
 
