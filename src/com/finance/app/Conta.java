@@ -1,22 +1,21 @@
-public class ContaGenerica {
-    
+package com.finance.app;
+
+public class Conta {
+
     private String numeroConta;
     private float saldo;
     private String agencia;
     private boolean localAtiva;
 
-    
-    public ContaGenerica() {}
+    public Conta() {}
 
-   
-    public ContaGenerica(String numeroConta, String agencia, float saldo, boolean localAtiva) {
+    public Conta(String numeroConta, String agencia, float saldo, boolean localAtiva) {
         this.numeroConta = numeroConta;
         this.agencia = agencia;
         this.saldo = saldo;
         this.localAtiva = localAtiva;
     }
 
-    
     public String getNumeroConta() {
         return numeroConta;
     }
@@ -49,14 +48,12 @@ public class ContaGenerica {
         this.localAtiva = localAtiva;
     }
 
-   
     public void depositarValor(float valor) {
         if (valor > 0) {
             this.saldo += valor;
         }
     }
 
-   
     public void depositarValor(float valor, String descricao) {
         if (valor > 0) {
             this.saldo += valor;
@@ -64,3 +61,4 @@ public class ContaGenerica {
         }
     }
 }
+
