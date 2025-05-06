@@ -23,10 +23,6 @@ public class ContaCliente extends Conta {
         return false;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
     public void adicionarTransacaoCrypto(TransacaoCrypto transacao) {
         this.transacoesCryptos.add(transacao);
     }
@@ -35,10 +31,15 @@ public class ContaCliente extends Conta {
         return transacoesCryptos;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
     @Override
     public String toString() {
         return "ContaCliente {" +
-                "numeroConta='" + getNumeroConta() + '\'' +
+                "id=" + getId() +
+                ", numeroConta='" + getNumeroConta() + '\'' +
                 ", agencia='" + getAgencia() + '\'' +
                 ", saldo=" + getSaldo() +
                 ", cliente=" + (cliente != null ? cliente.getNome() : "N/A") +
