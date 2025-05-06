@@ -32,7 +32,7 @@ public abstract class Conta {
         return id;
     }
 
-    // Métodos que devem ser implementados pelas subclasses (polimorfismo)
+    
     public abstract float getSaldo();
 
     public abstract boolean depositar(float valor);
