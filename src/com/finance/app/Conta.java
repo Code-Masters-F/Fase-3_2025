@@ -1,64 +1,79 @@
 package com.finance.app;
 
-public class Conta {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Conta {
+    private static int proximoId = 1;
+    private int id;
     private String numeroConta;
     private float saldo;
     private String agencia;
-    private boolean localAtiva;
+    private List<TransacaoConta> transacoesContas;
 
-    public Conta() {}
-
-    public Conta(String numeroConta, String agencia, float saldo, boolean localAtiva) {
+    public Conta(String numeroConta, String agencia) {
         this.numeroConta = numeroConta;
         this.agencia = agencia;
-        this.saldo = saldo;
-        this.localAtiva = localAtiva;
+        this.saldo = 0.0f;
+        this.transacoesContas = new ArrayList<>();
+        this.id = proximoId++;
+    }
+
+    public boolean depositar(float valor) {
+        if (valor > 0) {
+            this.saldo += valor;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean transferirParaOutraConta(float valor, String numeroContaOrigem,
+                                            String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
+        TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
+        subtrairSaldo(valor);
+        adicionarTransacaoConta(transacao);
+        return true;
+    }
+
+    public boolean receberTransacaoConta(float valor, String numeroContaOrigem,
+                                         String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
+        TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
+        adicionarSaldo(valor);
+        adicionarTransacaoConta(transacao);
+        return true;
+    }
+
+    protected boolean adicionarSaldo(float valor) {
+        return depositar(valor);
+    }
+
+    protected boolean subtrairSaldo(float valor) {
+        if (valor > 0 && this.saldo >= valor) {
+            this.saldo -= valor;
+            return true;
+        }
+        return false;
+    }
+
+    public void adicionarTransacaoConta(TransacaoConta transacao) {
+        this.transacoesContas.add(transacao);
+    }
+
+    public List<TransacaoConta> getTransacoesContas() {
+        return transacoesContas;
     }
 
     public String getNumeroConta() {
         return numeroConta;
     }
 
-    public void setNumeroConta(String numeroConta) {
-        this.numeroConta = numeroConta;
+    public String getAgencia() {
+        return agencia;
     }
 
     public float getSaldo() {
         return saldo;
     }
-
-    public void setSaldo(float saldo) {
-        this.saldo = saldo;
-    }
-
-    public String getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
-    }
-
-    public boolean isLocalAtiva() {
-        return localAtiva;
-    }
-
-    public void setLocalAtiva(boolean localAtiva) {
-        this.localAtiva = localAtiva;
-    }
-
-    public void depositarValor(float valor) {
-        if (valor > 0) {
-            this.saldo += valor;
-        }
-    }
-
-    public void depositarValor(float valor, String descricao) {
-        if (valor > 0) {
-            this.saldo += valor;
-            System.out.println("Depósito realizado: " + descricao);
-        }
-    }
 }
+
 
