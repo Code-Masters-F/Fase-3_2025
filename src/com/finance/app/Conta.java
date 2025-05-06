@@ -1,66 +1,19 @@
 package com.finance.app;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
-public class Conta {
+public abstract class Conta {
     private static int proximoId = 1;
-    private int id;
-    private String numeroConta;
-    private float saldo;
-    private String agencia;
-    private List<TransacaoConta> transacoesContas;
+    private final int id;
+    private final String numeroConta;
+    private final String agencia;
+    private final LocalDate dataAbertura;
 
-    public Conta(String numeroConta, String agencia) {
+    public Conta(String numeroConta, String agencia, LocalDate dataAbertura) {
         this.numeroConta = numeroConta;
         this.agencia = agencia;
-        this.saldo = 0.0f;
-        this.transacoesContas = new ArrayList<>();
+        this.dataAbertura = dataAbertura;
         this.id = proximoId++;
-    }
-
-    public boolean depositar(float valor) {
-        if (valor > 0) {
-            this.saldo += valor;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean transferirParaOutraConta(float valor, String numeroContaOrigem,
-                                            String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
-        TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
-        subtrairSaldo(valor);
-        adicionarTransacaoConta(transacao);
-        return true;
-    }
-
-    public boolean receberTransacaoConta(float valor, String numeroContaOrigem,
-                                         String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
-        TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
-        adicionarSaldo(valor);
-        adicionarTransacaoConta(transacao);
-        return true;
-    }
-
-    protected boolean adicionarSaldo(float valor) {
-        return depositar(valor);
-    }
-
-    protected boolean subtrairSaldo(float valor) {
-        if (valor > 0 && this.saldo >= valor) {
-            this.saldo -= valor;
-            return true;
-        }
-        return false;
-    }
-
-    public void adicionarTransacaoConta(TransacaoConta transacao) {
-        this.transacoesContas.add(transacao);
-    }
-
-    public List<TransacaoConta> getTransacoesContas() {
-        return transacoesContas;
     }
 
     public String getNumeroConta() {
@@ -71,13 +24,18 @@ public class Conta {
         return agencia;
     }
 
-    public float getSaldo() {
-        return saldo;
+    public LocalDate getDataAbertura() {
+        return dataAbertura;
     }
 
     public int getId() {
         return id;
     }
+
+    // Métodos que devem ser implementados pelas subclasses (polimorfismo)
+    public abstract float getSaldo();
+
+    public abstract boolean depositar(float valor);
 }
 
 
