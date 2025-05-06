@@ -3,7 +3,7 @@ package com.finance.app;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Conta {
+public class ContaCliente {
     private static int proximoId = 1;
     private int id;
     private String numeroConta;
@@ -13,7 +13,7 @@ public class Conta {
     private List<TransacaoConta> transacoesContas;
     private Cliente cliente;
 
-    public Conta(String numeroConta, String agencia, Cliente cliente) {
+    public ContaCliente(String numeroConta, String agencia, Cliente cliente) {
         this.numeroConta = numeroConta;
         this.agencia = agencia;
         this.cliente = cliente;
@@ -31,19 +31,17 @@ public class Conta {
         return false;
     }
 
-    // transferencia entre clientes do mesmo sistema
     public boolean transferirContasCorretora(Conta destino, float valor) {
         if (valor > 0 && this.saldo >= valor) {
-            destino.receberTransacaoConta(valor, this.numeroConta, destino.numeroConta, this.agencia, destino.agencia);
-            this.transferirParaOutraConta(valor, this.numeroConta, destino.numeroConta, this.agencia, destino.agencia);
+            destino.receberTransacaoConta(valor, this.numeroConta, destino.getNumeroConta(), this.agencia, destino.getAgencia());
+            this.transferirParaOutraConta(valor, this.numeroConta, destino.getNumeroConta(), this.agencia, destino.getAgencia());
             return true;
         }
         return false;
     }
 
     public boolean transferirParaOutraConta(float valor, String numeroContaOrigem,
-                                   String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
-
+                                            String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
         TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
         subtrairSaldo(valor);
         adicionarTransacaoConta(transacao);
@@ -51,8 +49,7 @@ public class Conta {
     }
 
     public boolean receberTransacaoConta(float valor, String numeroContaOrigem,
-                                   String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
-
+                                         String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
         TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
         adicionarSaldo(valor);
         adicionarTransacaoConta(transacao);
@@ -105,7 +102,7 @@ public class Conta {
 
     @Override
     public String toString() {
-        return "Conta {" +
+        return "ContaCliente {" +
                 "id=" + id +
                 ", numeroConta='" + numeroConta + '\'' +
                 ", agencia='" + agencia + '\'' +
@@ -116,3 +113,4 @@ public class Conta {
                 '}';
     }
 }
+
