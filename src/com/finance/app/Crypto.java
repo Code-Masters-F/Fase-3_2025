@@ -47,7 +47,25 @@ public class Crypto {
 
     // para definir o ano de lançamento
     public void setAnoLancamento(int anoLancamento) {
-        this.anoLancamento = anoLancamento;
+        try {
+            // Validação para garantir que o ano seja positivo
+            if (anoLancamento <= 0) {
+                throw new IllegalArgumentException("Ano de lançamento deve ser um valor positivo");
+            }
+
+            // Validação para garantir que o ano não seja futuro
+            int anoAtual = java.time.Year.now().getValue();
+            if (anoLancamento > anoAtual) {
+                throw new IllegalArgumentException("Ano de lançamento não pode ser no futuro");
+            }
+
+            this.anoLancamento = anoLancamento;
+
+        } catch (IllegalArgumentException e) {
+            // Registra e propaga a exceção para tratamento adequado
+            System.err.println("Erro ao definir ano de lançamento: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
