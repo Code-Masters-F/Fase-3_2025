@@ -1,6 +1,5 @@
 package com.finance.app;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +10,8 @@ public class ContaCliente extends Conta {
     private List<TransacaoCrypto> transacoesCryptos;
     private List<TransacaoConta> transacoesContas;
 
-    public ContaCliente(String numeroConta, String agencia, LocalDate dataAbertura, Cliente cliente) {
-        super(numeroConta, agencia, dataAbertura);
+    public ContaCliente(String numeroConta, String agencia, Cliente cliente) {
+        super(numeroConta, agencia);
         this.cliente = cliente;
         this.saldo = 0.0f;
         this.transacoesCryptos = new ArrayList<>();
@@ -85,4 +84,5 @@ public class ContaCliente extends Conta {
                 '}';
     }
 }
+
 
