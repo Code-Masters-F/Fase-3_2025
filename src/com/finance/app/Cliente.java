@@ -10,18 +10,31 @@ public class Cliente extends Pessoa{
     // Construtor 1
     Cliente(String cpf, String nome, String email, String dataNascimento) {
         super(cpf, nome, dataNascimento); // yyyy-MM-dd
-        this.email = email;
-        // this.conta = criarConta(...);
+
+        try {
+            this.email = email;
+        } catch (Exception e) {
+            System.err.println("Erro ao definir email: " + e.getMessage());
+            this.email = "email_invalido@placeholder.com";
+        }
 
         this.id = proximoId++;
     }
 
-    // Construtor 2
+    // Construtor 2 - agora com tratamento de exceção para o email
     Cliente(Pessoa pessoa, String email) {
         super(pessoa.getCpf(), pessoa.getNome(), pessoa.getDataNascimento());
-        this.email = email;
+
+        try {
+            this.email = email;
+        } catch (Exception e) {
+            System.err.println("Erro ao definir email: " + e.getMessage());
+            this.email = "email_invalido@placeholder.com";
+        }
+
         this.id = proximoId++;
     }
+
 
 
     public void criarConta(String numeroConta, String agencia) {
