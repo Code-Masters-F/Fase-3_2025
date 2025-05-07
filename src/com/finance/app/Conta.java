@@ -9,10 +9,10 @@ public abstract class Conta {
     private final String agencia;
     private final LocalDate dataAbertura;
 
-    public Conta(String numeroConta, String agencia, LocalDate dataAbertura) {
+    public Conta(String numeroConta, String agencia) {
         this.numeroConta = numeroConta;
         this.agencia = agencia;
-        this.dataAbertura = dataAbertura;
+        this.dataAbertura = LocalDate.now();
         this.id = proximoId++;
     }
 
@@ -32,10 +32,8 @@ public abstract class Conta {
         return id;
     }
 
-    
     public abstract float getSaldo();
 
     public abstract boolean depositar(float valor);
 }
-
 
