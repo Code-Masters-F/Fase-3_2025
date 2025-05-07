@@ -1,5 +1,7 @@
 package com.finance.app;
 
+import java.security.spec.ECField;
+
 public class Crypto {
     // Atributos
     private static int proximoId = 1;
@@ -70,13 +72,15 @@ public class Crypto {
 
     @Override
     public String toString() {
-        return "Crypto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", simbolo='" + simbolo + '\'' +
-                ", anoLancamento=" + anoLancamento +
-                '}';
+        try {
+            return "Crypto{" +
+                    "id=" + id +
+                    ", nome='" + nome + '\'' +
+                    ", simbolo='" + simbolo + '\'' +
+                    ", anoLancamento=" + anoLancamento +
+                    '}';
+        } catch (Exception e) {
+            return "Erro ao gerar representação da criptomoeda: " + e.getMessage();
+        }
     }
-
-
 }
