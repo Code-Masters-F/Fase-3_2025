@@ -34,9 +34,26 @@ public class Conta {
     // transferencia entre clientes do mesmo sistema
     public boolean transferirContasCorretora(Conta destino, float valor) {
         if (valor > 0 && this.saldo >= valor) {
-            destino.receberTransacaoConta(valor, this.numeroConta, destino.numeroConta, this.agencia, destino.agencia);
-            this.transferirParaOutraConta(valor, this.numeroConta, destino.numeroConta, this.agencia, destino.agencia);
-            return true;
+            try {
+                destino.receberTransacaoConta(
+                        valor,
+                        this.numeroConta,
+                        destino.numeroConta,
+                        this.agencia,
+                        destino.agencia
+                );
+                this.transferirParaOutraConta(
+                        valor,
+                        this.numeroConta,
+                        destino.numeroConta,
+                        this.agencia,
+                        destino.agencia
+                );
+                return true;
+            } catch (Exception e) {
+                System.err.println("Erro ao transferir entre corretoras: " + e.getMessage());
+                return false;
+            }
         }
         return false;
     }
