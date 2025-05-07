@@ -1,72 +1,73 @@
 package com.finance.app;
 
-import java.security.spec.ECField;
+import java.time.Year;
 
 public class Crypto {
     // Atributos
     private static int proximoId = 1;
     private int id;
-    private String nome; // nome da cripto
-    private String simbolo; // simbolo da cripto
-    private int anoLancamento; // ano da cripto
+    private String nome;
+    private String simbolo;
+    private int anoLancamento = 0; // Inicializando com valor padrão 0
 
     // Construtor
     public Crypto(String nome, String simbolo) {
+        try {
+            validarCampoNaoVazio(nome, "Nome");
+            validarCampoNaoVazio(simbolo, "Simbolo");
 
-        // Esta validação é crucial para garantir que uma criptomoeda tenha sempre um nome válido
-        if (nome == null || nome.trim().isEmpty()) {
-            // Lança uma exceção que interrompe a criação do objeto, indicando ao chamador o problema exato
-            throw new IllegalArgumentException("Nome da criptomoeda não pode ser nulo ou vazio");
+            this.nome = nome;
+            this.simbolo = simbolo;
+            this.id = proximoId++;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Erro ao criar Crypto: " + e.getMessage());
         }
-
-        // Símbolos são importantes para identificação única e rápida da criptomoeda (ex: BTC, ETH)
-        if (simbolo == null || simbolo.trim().isEmpty()) {
-            // Lança exceção informando o erro específico relacionado ao símbolo
-            throw new IllegalArgumentException("Símbolo da criptomoeda não pode ser nulo ou vazio");
-        }
-
-        this.nome = nome;
-        this.simbolo = simbolo;
-        this.id = proximoId++;
     }
 
-    // Métodos com tipos de retorno corretos
+    // Método para validação de campos não vazios
+    private void validarCampoNaoVazio(String valor, String campo) {
+        try {
+            if (valor == null || valor.trim().isEmpty()) {
+                throw new IllegalArgumentException(campo + " não pode ser nulo ou vazio");
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Erro no campo " + campo + ": " + e.getMessage());
+            throw e;  // Re-lançando a exceção após o log
+        }
+    }
+
+    // Métodos getters
     public String getNome() {
-        return nome;  // Retorna String em vez de void
+        return nome;
     }
 
     public String getSimbolo() {
-        return simbolo;  // Retorna String em vez de void
+        return simbolo;
     }
 
     public int getAnoLancamento() {
-        return anoLancamento;  // Retorna int em vez de void
+        return anoLancamento;
     }
 
     public int getId() {
         return id;
     }
 
-    // para definir o ano de lançamento
+    // Método setter para o ano de lançamento
     public void setAnoLancamento(int anoLancamento) {
         try {
-            // Validação para garantir que o ano seja positivo
             if (anoLancamento <= 0) {
                 throw new IllegalArgumentException("Ano de lançamento deve ser um valor positivo");
             }
 
-            // Validação para garantir que o ano não seja futuro
-            int anoAtual = java.time.Year.now().getValue();
+            int anoAtual = Year.now().getValue();
             if (anoLancamento > anoAtual) {
                 throw new IllegalArgumentException("Ano de lançamento não pode ser no futuro");
             }
 
             this.anoLancamento = anoLancamento;
-
         } catch (IllegalArgumentException e) {
-            // Registra e propaga a exceção para tratamento adequado
             System.err.println("Erro ao definir ano de lançamento: " + e.getMessage());
-            throw e;
         }
     }
 
@@ -80,7 +81,8 @@ public class Crypto {
                     ", anoLancamento=" + anoLancamento +
                     '}';
         } catch (Exception e) {
-            return "Erro ao gerar representação da criptomoeda: " + e.getMessage();
+            System.err.println("Erro ao gerar representação da criptomoeda: " + e.getMessage());
+            return "Erro ao gerar representação da criptomoeda";
         }
     }
 }
