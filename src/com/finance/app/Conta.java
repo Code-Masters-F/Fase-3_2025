@@ -59,13 +59,19 @@ public class Conta {
     }
 
     public boolean transferirParaOutraConta(float valor, String numeroContaOrigem,
-                                   String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
-
-        TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
-        subtrairSaldo(valor);
-        adicionarTransacaoConta(transacao);
-        return true;
+                                            String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
+        try {
+            TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
+            subtrairSaldo(valor);
+            adicionarTransacaoConta(transacao);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro ao transferir para outra conta: " + e.getMessage());
+            e.printStackTrace(); // Opcional: útil para depuração
+            return false;
+        }
     }
+
 
     public boolean receberTransacaoConta(float valor, String numeroContaOrigem,
                                    String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
