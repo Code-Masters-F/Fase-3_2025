@@ -35,6 +35,21 @@ public abstract class Conta {
 
     public abstract float getSaldo();
 
-    public abstract boolean depositar(float valor);
+    public boolean depositar(float valor) {
+        try {
+            // Validação do valor de depósito
+            if (valor <= 0) {
+                throw new IllegalArgumentException("Valor de depósito deve ser maior que zero");
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Erro no depósito: " + e.getMessage());
+            // Dependendo da política da aplicação, podemos retornar false ou relançar
+            return false;
+        } catch (Exception e) {
+            System.err.println("Erro inesperado ao processar depósito: " + e.getMessage());
+            return false;
+        }
+    }
 }
 
