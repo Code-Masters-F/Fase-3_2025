@@ -74,12 +74,16 @@ public class Conta {
 
 
     public boolean receberTransacaoConta(float valor, String numeroContaOrigem,
-                                   String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
-
-        TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
-        adicionarSaldo(valor);
-        adicionarTransacaoConta(transacao);
-        return true;
+                                         String numeroContaDestino, String agenciaOrigem, String agenciaDestino) {
+        try {
+            TransacaoConta transacao = new TransacaoConta(valor, numeroContaOrigem, numeroContaDestino, agenciaOrigem, agenciaDestino);
+            adicionarSaldo(valor);
+            adicionarTransacaoConta(transacao);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro ao receber transação da conta: " + e.getMessage());
+            return false;
+        }
     }
 
     private boolean adicionarSaldo(float valor) {
