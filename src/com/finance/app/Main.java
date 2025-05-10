@@ -9,7 +9,7 @@ public class Main {
     // metodo que verifica se o email está certo ou não
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
 
-    // Polimorfismo manual: método que retorna a idade de um objeto Pessoa
+    // Polimorfismo manual. A classe Cliente pode se passar pela classe Pessoa
     private static int calcularIdade(Pessoa pessoa) {
         return pessoa.getIdade();
     }
@@ -23,7 +23,7 @@ public class Main {
             if (cpf.matches("\\d{11}")) {
                 return cpf;
             }
-            System.err.println("CPF inválido. Deve conter 11 dígitos numéricos.");
+            System.out.println("CPF inválido. Deve conter 11 dígitos numéricos.");
         }
     }
 
@@ -36,7 +36,7 @@ public class Main {
             if (EMAIL_PATTERN.matcher(email).matches()) {
                 return email;
             }
-            System.err.println("E-mail inválido. Formato correto: exemplo@dominio.com");
+            System.out.println("E-mail inválido. Formato correto: exemplo@dominio.com");
         }
     }
 
@@ -50,7 +50,7 @@ public class Main {
                 LocalDate.parse(data);
                 return data;
             } catch (DateTimeParseException e) {
-                System.err.println("Formato de data inválido. Utilize YYYY-MM-DD.");
+                System.out.println("Formato de data inválido. Utilize YYYY-MM-DD.");
             }
         }
     }
@@ -59,33 +59,32 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("=== Cadastro de Cliente ===");
-
             String cpf1 = lerCPF(scanner);
             System.out.print("Digite o nome: ");
             String nome1 = scanner.nextLine();
             String email1 = lerEmail(scanner);
             String dataNasc1 = lerData(scanner);
 
-            Cliente robson123 = new Cliente(cpf1, nome1, email1, dataNasc1);
-//
-//            // Exemplos de uso de outras classes (sem alterações)
-//            Pessoa maria = new Pessoa("22222244444", "Maria", "1994-03-03");
-//            Cliente maria123 = new Cliente(maria, "maria@email.com");
-//
-//            System.out.println(robson123);
-//            robson123.criarConta("123123", "0001");
-//            maria123.criarConta("456456", "0001");
-//            robson123.contaCliente.depositar(20.01f);
-//            robson123.contaCliente.transferirContasCorretora(maria123.contaCliente, 10.5f);
-//            System.out.println(maria123.contaCliente);
-//            System.out.println(robson123.contaCliente);
-//            System.out.println(robson123);
-//
-//            Crypto ethereum = new Crypto("Ethereum", "ETH");
-//            ethereum.setAnoLancamento(2015);
-//            System.out.println(ethereum);
+            Cliente cliente123 = new Cliente(cpf1, nome1, email1, dataNasc1);
+            cliente123.criarConta("123123", "0001");
 
-            System.out.println("Idade do cliente: " + calcularIdade(robson123));
+            System.out.println("\nIdade do cliente: " + calcularIdade(cliente123));
+            System.out.println(cliente123 + "\n");
+
+            // Exemplos de uso de outras classes e mais funcionalidades em prática
+            Pessoa maria = new Pessoa("22222244444", "Maria", "1994-03-03");
+            Cliente maria123 = new Cliente(maria, "maria@email.com");
+
+            maria123.criarConta("456456", "0001");
+            cliente123.contaCliente.depositar(20.01f);
+            cliente123.contaCliente.transferirContasCorretora(maria123.contaCliente, 10.5f);
+            System.out.println(maria123.contaCliente);
+            System.out.println(cliente123.contaCliente);
+            System.out.println(cliente123);
+
+            Crypto ethereum = new Crypto("Ethereum", "ETH");
+            ethereum.setAnoLancamento(2015);
+            System.out.println(ethereum);
 
         } catch (Exception e) {
             System.err.println("Ocorreu um erro: " + e.getMessage());
@@ -95,3 +94,9 @@ public class Main {
         }
     }
 }
+/*
+    OBS:
+    Há funcionalidades que ainda serão polidas com o decorrer do projeto.
+    Algumas delas são as funcionalidade de comprar e vender Crypto de ContaCliente. Há a necessidade
+    de conhecimento em algumas estruturas de dados que provavelmente devem ser ensinadas na proxima fase.
+ */
