@@ -2,7 +2,7 @@ package com.finance.app;
 
 public class Main {
 
-    // Polimorfismo
+    // Polimorfismo manual
     private static int calcularIdade(Pessoa pessoa) {
         return pessoa.getIdade();
     }

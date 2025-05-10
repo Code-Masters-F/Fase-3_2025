@@ -71,6 +71,18 @@ public class ContaCliente extends Conta {
         return cliente;
     }
 
+    /*
+        Estudo sobre estrutura de dados em andamento, para poder implementar as funcionalidades:
+            comprarCrypto()
+            venderCrypto()
+
+        E o atributo "carteira" que armazenará uma lista com cada indice armazenando um valor double associado a uma
+        classe, (quantidade da crypto que se tem) a uma classe Crypto (moeda que se possui).
+
+        exemplo visual:
+        carteira = [ [double 0.0003, class bitcoin], [double 0.002, class etherium] ]
+     */
+
     @Override
     public String toString() {
         return "ContaCliente {" +
