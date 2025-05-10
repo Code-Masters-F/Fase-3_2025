@@ -1,6 +1,12 @@
 package com.finance.app;
 
 public class Main {
+
+    // Polimorfismo
+    private static int calcularIdade(Pessoa pessoa) {
+        return pessoa.getIdade();
+    }
+
     public static void main(String[] args) {
 
 
@@ -27,6 +33,8 @@ public class Main {
         Crypto ethereum = new Crypto("Ethereum", "ETH");
         ethereum.setAnoLancamento(2015); // definindo o ano de lançamento da criptomoeda
         System.out.println(ethereum.toString());
+
+        System.out.println("Idade do cliente: " + calcularIdade(robson123));
 
 
 
