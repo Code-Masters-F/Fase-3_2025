@@ -6,7 +6,7 @@ public class Main {
 
 
         // Algumas sugestões de teste:
-        /*
+
 
         // Testes Classe Cliente:
         Cliente robson123 = new Cliente("222222-33333", "Robson", "robsone@mail.com", "2000-02-02");
@@ -18,17 +18,17 @@ public class Main {
         robson123.criarConta("123123", "0001");
         maria123.criarConta("456456", "0001");
 
-        robson123.conta.depositar(20.01f);
-        robson123.conta.transferirContasCorretora(maria123.conta, 10.5f);
-        System.out.println(maria123.conta.toString());
-        System.out.println(robson123.conta.toString());
+        robson123.contaCliente.depositar(20.01f);
+        robson123.contaCliente.transferirContasCorretora(maria123.contaCliente, 10.5f);
+        System.out.println(maria123.contaCliente.toString());
+        System.out.println(robson123.contaCliente.toString());
         System.out.println(robson123.toString());
 
         Crypto ethereum = new Crypto("Ethereum", "ETH");
         ethereum.setAnoLancamento(2015); // definindo o ano de lançamento da criptomoeda
         System.out.println(ethereum.toString());
 
-        */
+
 
     }
 }

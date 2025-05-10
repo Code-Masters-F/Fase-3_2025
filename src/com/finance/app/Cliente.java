@@ -4,7 +4,7 @@ public class Cliente extends Pessoa{
 
     private static int proximoId = 1;
     private int id;
-    Conta conta;
+    ContaCliente contaCliente;
     private String email;
 
     // Construtor 1
@@ -25,7 +25,7 @@ public class Cliente extends Pessoa{
 
 
     public void criarConta(String numeroConta, String agencia) {
-        this.conta = new Conta(numeroConta, agencia, this);
+        this.contaCliente = new ContaCliente(numeroConta, agencia, this);
     }
 
     public String getEmail() {
@@ -38,7 +38,7 @@ public class Cliente extends Pessoa{
         return "Cliente{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", conta=" + conta +
+                ", conta=" + contaCliente +
                 "} " +
                 super.toString()
                 ;
