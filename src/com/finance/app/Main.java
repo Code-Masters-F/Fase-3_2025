@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 public class Main {
-
+    // metodo que verifica se o email está certo ou não
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
 
     // Polimorfismo manual: método que retorna a idade de um objeto Pessoa
@@ -67,23 +67,23 @@ public class Main {
             String dataNasc1 = lerData(scanner);
 
             Cliente robson123 = new Cliente(cpf1, nome1, email1, dataNasc1);
-
-            // Exemplos de uso de outras classes (sem alterações)
-            Pessoa maria = new Pessoa("22222244444", "Maria", "1994-03-03");
-            Cliente maria123 = new Cliente(maria, "maria@email.com");
-
-            System.out.println(robson123);
-            robson123.criarConta("123123", "0001");
-            maria123.criarConta("456456", "0001");
-            robson123.contaCliente.depositar(20.01f);
-            robson123.contaCliente.transferirContasCorretora(maria123.contaCliente, 10.5f);
-            System.out.println(maria123.contaCliente);
-            System.out.println(robson123.contaCliente);
-            System.out.println(robson123);
-
-            Crypto ethereum = new Crypto("Ethereum", "ETH");
-            ethereum.setAnoLancamento(2015);
-            System.out.println(ethereum);
+//
+//            // Exemplos de uso de outras classes (sem alterações)
+//            Pessoa maria = new Pessoa("22222244444", "Maria", "1994-03-03");
+//            Cliente maria123 = new Cliente(maria, "maria@email.com");
+//
+//            System.out.println(robson123);
+//            robson123.criarConta("123123", "0001");
+//            maria123.criarConta("456456", "0001");
+//            robson123.contaCliente.depositar(20.01f);
+//            robson123.contaCliente.transferirContasCorretora(maria123.contaCliente, 10.5f);
+//            System.out.println(maria123.contaCliente);
+//            System.out.println(robson123.contaCliente);
+//            System.out.println(robson123);
+//
+//            Crypto ethereum = new Crypto("Ethereum", "ETH");
+//            ethereum.setAnoLancamento(2015);
+//            System.out.println(ethereum);
 
             System.out.println("Idade do cliente: " + calcularIdade(robson123));
 
